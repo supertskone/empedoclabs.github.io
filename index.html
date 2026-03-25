@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EmpedocLabs — Preventive Neurological Intelligence</title>
+<meta name="description" content="EmpedocLabs builds AI-powered tools that predict neurological events before they happen. Starting with migraines.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#08070C;
+  --ac:#9B8FE0;
+  --ac2:#B5ABEB;
+  --gn:#6DBFA0;
+  --gd:#D4B96A;
+  --t1:#EEEDF2;
+  --t2:#7A7688;
+  --t3:#4E4B5C;
+  --bd:rgba(255,255,255,.06);
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--t1);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::after{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.015'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.5}
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 40px;position:relative}
+.hero-glow{position:absolute;width:800px;height:800px;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(155,143,224,.04) 0%,transparent 70%);pointer-events:none}
+.hero-inner{position:relative;z-index:2;max-width:680px}
+.logo-wrap{margin-bottom:64px;animation:fi .8s ease both}
+.hero h1{font-family:var(--serif);font-size:clamp(44px,6.5vw,80px);font-weight:300;line-height:1.06;letter-spacing:-.04em;margin-bottom:32px;animation:fi .8s .15s ease both}
+.hero h1 em{font-style:italic;font-weight:400;color:var(--ac2)}
+.hero-desc{font-size:17px;font-weight:300;color:var(--t2);line-height:1.75;max-width:480px;margin:0 auto;animation:fi .8s .3s ease both}
+.products{padding:0 40px 160px;animation:fi .8s .5s ease both}
+.products-inner{max-width:800px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--bd);border-radius:20px;overflow:hidden}
+.prod-card{background:var(--bg);padding:56px 44px;transition:background .4s;text-decoration:none;display:block}
+.prod-card:hover{background:#0C0B14}
+.prod-tag{font-size:10px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:20px}
+.prod-card h2{font-family:var(--serif);font-size:32px;font-weight:400;letter-spacing:-.02em;margin-bottom:12px;color:var(--t1)}
+.prod-desc{font-size:14px;font-weight:300;color:var(--t2);line-height:1.7;margin-bottom:24px}
+.prod-status{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:500;letter-spacing:.5px;color:var(--t3);padding:6px 14px;border-radius:100px;border:1px solid var(--bd)}
+.prod-status .dot{width:5px;height:5px;border-radius:50%}
+.links-bar{border-top:1px solid var(--bd);padding:48px 40px;text-align:center;animation:fi .8s .65s ease both}
+.links-bar a{color:var(--t3);text-decoration:none;font-size:13px;font-weight:400;letter-spacing:.3px;margin:0 20px;transition:color .2s}
+.links-bar a:hover{color:var(--t1)}
+.links-bar .sep{color:var(--t3);opacity:.2;font-size:13px}
+.foot{padding:40px;text-align:center}
+.foot p{font-size:11px;color:var(--t3);font-weight:300;letter-spacing:.3px}
+@keyframes fi{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:640px){
+  .hero{padding:60px 24px}
+  .hero h1{font-size:40px}
+  .products{padding:0 24px 100px}
+  .products-inner{grid-template-columns:1fr}
+  .prod-card{padding:40px 32px}
+  .links-bar a{display:block;margin:12px 0}
+  .links-bar .sep{display:none}
+}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="logo-wrap">
+      <img src="empedoc-logo.png" alt="EmpedocLabs" style="height:36px;filter:invert(1);opacity:.85">
+    </div>
+    <h1>Preventive intelligence<br>for the <em>nervous system</em></h1>
+    <p class="hero-desc">EmpedocLabs builds AI that predicts neurological events before they happen &mdash; combining wearable biometrics, atmospheric data, and machine learning to shift healthcare from reactive to preventive.</p>
+  </div>
+</div>
+<div class="products">
+  <div class="products-inner">
+    <a href="/phoebe/" class="prod-card">
+      <div class="prod-tag" style="color:var(--ac)">Product</div>
+      <h2>Phoebe</h2>
+      <p class="prod-desc">AI-powered migraine prediction engine. Combines Apple Watch biometrics with atmospheric pressure to forecast attacks up to 7 days ahead.</p>
+      <div class="prod-status"><span class="dot" style="background:var(--gn)"></span> Beta &mdash; iOS</div>
+    </a>
+    <div class="prod-card">
+      <div class="prod-tag" style="color:var(--gd)">Research</div>
+      <h2>Clara</h2>
+      <p class="prod-desc">Early cognitive decline detection through passive behavioral and biometric analysis. Continuous monitoring for neurodegenerative risk signals.</p>
+      <div class="prod-status"><span class="dot" style="background:var(--gd)"></span> In Development</div>
+    </div>
+  </div>
+</div>
+<div class="links-bar">
+  <a href="/phoebe/">Phoebe</a>
+  <span class="sep">/</span>
+  <a href="/phoebe/support">Support</a>
+  <span class="sep">/</span>
+  <a href="/phoebe/termsandpolicy">Legal</a>
+  <span class="sep">/</span>
+  <a href="mailto:info@empedoc.com">info@empedoc.com</a>
+</div>
+<div class="foot">
+  <p>&copy; 2026 EMPEDOC AI LLC &middot; Belgrade, Serbia</p>
+</div>
+</body>
+</html>

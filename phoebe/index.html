@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phoebe — Predict Migraines Before They Hit</title>
+<meta name="description" content="Phoebe uses Apple Watch biometrics and atmospheric intelligence to predict migraine attacks before they happen.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#08070C;
+  --bg2:#0C0B12;
+  --bgc:#12111A;
+  --bgl:#FAFAFA;
+  --bgw:#FFFFFF;
+  --ac:#9B8FE0;
+  --ac2:#B5ABEB;
+  --ac-dim:rgba(155,143,224,.08);
+  --ac-glow:rgba(155,143,224,.12);
+  --gn:#6DBFA0;
+  --gd:#D4B96A;
+  --rd:#D4736F;
+  --t1:#EEEDF2;
+  --t2:#8A8694;
+  --t3:#5C586A;
+  --tl1:#111018;
+  --tl2:#56536A;
+  --tl3:#8E8BA0;
+  --bd:rgba(255,255,255,.06);
+  --bdl:rgba(0,0,0,.06);
+  --serif:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:15px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;background:var(--bg);color:var(--t1);overflow-x:hidden;letter-spacing:-.01em}
+
+/* ═══════════════════════ NAV ═══════════════════════ */
+.nav{position:fixed;top:0;left:0;right:0;height:72px;z-index:1000;transition:background .4s,border .4s}
+.nav.sc{background:rgba(8,7,12,.92);backdrop-filter:blur(32px);-webkit-backdrop-filter:blur(32px);border-bottom:1px solid var(--bd)}
+.nav-in{max-width:1240px;margin:0 auto;padding:0 40px;height:100%;display:flex;align-items:center;justify-content:space-between}
+/* Nav logo */
+.nav-logo{height:28px;opacity:.9;display:block}
+.nav-l{display:flex;align-items:center;gap:40px;list-style:none}
+.nav-l a{color:var(--t3);text-decoration:none;font-size:13px;font-weight:500;letter-spacing:.3px;transition:color .2s}
+.nav-l a:hover{color:var(--t1)}
+.nav-cta{color:var(--t1)!important;background:var(--ac-dim);border:1px solid rgba(155,143,224,.15);padding:9px 22px;border-radius:100px;font-weight:500;transition:background .2s,border-color .2s}
+.nav-cta:hover{background:rgba(155,143,224,.15);border-color:rgba(155,143,224,.3)}
+.mob-btn{display:none;background:none;border:none;color:var(--t2);cursor:pointer}
+.mob-btn svg{width:20px;height:20px}
+
+/* ═══════════════════════ HERO ═══════════════════════ */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:140px 40px 100px}
+.hero-grad{position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:900px;height:900px;background:radial-gradient(circle,rgba(155,143,224,.06) 0%,transparent 70%);pointer-events:none}
+.hero-c{position:relative;z-index:2;max-width:760px}
+.hero-tag{display:inline-flex;align-items:center;gap:10px;padding:7px 18px 7px 12px;border-radius:100px;border:1px solid var(--bd);font-size:12px;font-weight:500;color:var(--t2);letter-spacing:.5px;margin-bottom:40px;animation:fu .8s ease both}
+.hero-tag .dot{width:5px;height:5px;background:var(--gn);border-radius:50%;animation:pul 2.5s infinite}
+.hero h1{font-family:var(--serif);font-size:clamp(48px,7vw,88px);font-weight:400;line-height:1.02;letter-spacing:-.03em;margin-bottom:28px;animation:fu .8s .1s ease both}
+.hero h1 em{font-style:italic;color:var(--ac2)}
+.hero-sub{font-size:17px;font-weight:300;color:var(--t2);max-width:520px;margin:0 auto 48px;line-height:1.7;letter-spacing:0;animation:fu .8s .2s ease both}
+.hero-act{display:flex;align-items:center;justify-content:center;gap:16px;animation:fu .8s .3s ease both}
+.btn-p{display:inline-flex;align-items:center;gap:10px;background:var(--ac);color:#fff;padding:14px 32px;border-radius:100px;font-size:14px;font-weight:500;text-decoration:none;letter-spacing:.2px;transition:transform .25s,box-shadow .25s}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 16px 48px rgba(155,143,224,.25)}
+.btn-p svg{width:16px;height:16px;fill:currentColor}
+.btn-s{display:inline-flex;align-items:center;gap:8px;color:var(--t2);padding:14px 32px;border-radius:100px;font-size:14px;font-weight:500;text-decoration:none;letter-spacing:.2px;border:1px solid var(--bd);transition:border-color .2s,color .2s}
+.btn-s:hover{border-color:rgba(155,143,224,.3);color:var(--t1)}
+
+/* Stats row */
+.hero-stats{display:flex;justify-content:center;gap:64px;margin-top:72px;animation:fu .8s .5s ease both}
+.h-stat{text-align:center}
+.h-stat .val{font-family:var(--serif);font-size:36px;font-weight:400;letter-spacing:-.02em}
+.h-stat .lbl{font-size:11px;font-weight:500;color:var(--t3);letter-spacing:1.5px;text-transform:uppercase;margin-top:6px}
+
+/* ═══════════════════════ DIVIDER BAR ═══════════════════════ */
+.div-bar{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd)}
+.div-item{padding:48px 32px;text-align:center;border-right:1px solid var(--bd)}
+.div-item:last-child{border-right:none}
+.div-item h3{font-family:var(--serif);font-size:18px;font-weight:500;margin-bottom:8px;letter-spacing:-.01em}
+.div-item p{font-size:13px;color:var(--t3);line-height:1.55;font-weight:300}
+
+/* ═══════════════════════ SECTION UTIL ═══════════════════════ */
+.sec{padding:160px 40px}
+.si{max-width:1100px;margin:0 auto}
+.sec-lab{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--ac);margin-bottom:20px}
+.sec-t{font-family:var(--serif);font-size:clamp(36px,5vw,56px);font-weight:400;line-height:1.08;letter-spacing:-.03em;margin-bottom:24px}
+.sec-s{font-size:16px;font-weight:300;line-height:1.7;color:var(--t2);max-width:520px}
+
+/* ═══════════════════════ HOW IT WORKS ═══════════════════════ */
+.how-g{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--bd);margin-top:72px;border-radius:20px;overflow:hidden}
+.how-item{background:var(--bgc);padding:40px 32px}
+.how-item .step{font-family:var(--serif);font-size:14px;color:var(--ac);margin-bottom:20px;letter-spacing:.5px}
+.how-item h3{font-size:16px;font-weight:600;margin-bottom:10px;letter-spacing:-.01em}
+.how-item p{font-size:13px;color:var(--t2);line-height:1.65;font-weight:300}
+
+/* ═══════════════════════ STICKY PHONE ═══════════════════════ */
+.sf-wrap{background:var(--bgl);position:relative}
+.sf-cont{max-width:1100px;margin:0 auto;padding:0 40px;position:relative}
+.sf-text{max-width:480px;padding:0 0 0 0}
+.sf-panel{min-height:100vh;display:flex;align-items:center}
+.sf-panel:last-child{min-height:70vh}
+.sf-panel .p-lab{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--ac);margin-bottom:20px}
+.sf-panel .p-ttl{font-family:var(--serif);font-size:clamp(32px,4vw,48px);font-weight:400;line-height:1.08;letter-spacing:-.03em;margin-bottom:20px;color:var(--tl1)}
+.sf-panel .p-desc{font-size:15px;font-weight:300;line-height:1.75;color:var(--tl2);max-width:420px}
+
+/* Phone — JS controlled positioning */
+.sf-phone-wrap{position:absolute;right:40px;top:0;width:300px;height:100%;pointer-events:none}
+.sf-phone-inner{pointer-events:auto;display:flex;flex-direction:column;align-items:center;width:300px}
+.sf-phone-inner.is-static{position:absolute;top:0}
+.sf-phone-inner.is-fixed{position:fixed}
+.sf-phone-inner.is-bottom{position:absolute;bottom:0;top:auto}
+
+.phone{width:268px;height:548px;background:var(--bgw);border-radius:44px;border:6px solid #1C1B23;overflow:hidden;position:relative;box-shadow:0 32px 80px rgba(0,0,0,.1),0 0 0 1px rgba(0,0,0,.04)}
+.phone-notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:100px;height:24px;background:#1C1B23;border-radius:0 0 16px 16px;z-index:10}
+.phone-scr{width:100%;height:100%;position:relative}
+.phone-scr .scr{position:absolute;inset:0;opacity:0;transition:opacity .6s cubic-bezier(.4,0,.2,1),transform .6s cubic-bezier(.4,0,.2,1);transform:translateY(8px);width:100%;height:100%;object-fit:cover;object-position:top}
+.phone-scr .scr.on{opacity:1;transform:translateY(0)}
+
+.phone-dots{display:flex;justify-content:center;gap:6px;margin-top:24px}
+.phone-dots .d{width:6px;height:6px;border-radius:50%;background:rgba(0,0,0,.1);transition:background .3s,transform .3s}
+.phone-dots .d.on{background:var(--ac);transform:scale(1.3)}
+
+/* ═══════════════════════ SCENARIOS ═══════════════════════ */
+.sc-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.sc-card{border-radius:20px;padding:40px 36px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .3s}
+.sc-card:hover{transform:translateY(-3px)}
+.sc-card.tall{grid-row:span 2;min-height:600px}
+.sc-card .sc-tag{font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:12px;opacity:.6}
+.sc-card h3{font-family:var(--serif);font-size:24px;font-weight:400;margin-bottom:14px;line-height:1.2;letter-spacing:-.02em}
+.sc-card p{font-size:13px;line-height:1.65;opacity:.75;font-weight:300}
+.sc-v{background:linear-gradient(165deg,#18152A 0%,#252048 100%);color:var(--t1)}
+.sc-g{background:linear-gradient(165deg,#0E201C 0%,#183830 100%);color:var(--t1)}
+.sc-y{background:linear-gradient(165deg,#201E10 0%,#38321E 100%);color:var(--t1)}
+.sc-r{background:linear-gradient(165deg,#201214 0%,#381E22 100%);color:var(--t1)}
+.ai-bub{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:16px 20px;margin-top:20px;font-size:12px;line-height:1.7;font-weight:300}
+.ai-bub .ai-tag{font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;opacity:.35}
+.ai-bub strong{color:var(--ac2);font-weight:500}
+
+/* ═══════════════════════ FEATURES ═══════════════════════ */
+.feat-g{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--bd);margin-top:72px;border-radius:20px;overflow:hidden}
+.feat-item{background:var(--bgc);padding:40px 32px}
+.feat-item h4{font-size:15px;font-weight:600;margin-bottom:10px;letter-spacing:-.01em}
+.feat-item p{font-size:13px;color:var(--t2);line-height:1.65;font-weight:300}
+.feat-item .fi-line{width:24px;height:1.5px;margin-bottom:20px}
+
+/* ═══════════════════════ GETTING STARTED ═══════════════════════ */
+.gs-row{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:72px}
+.gs-card{padding:40px;border-radius:20px;background:var(--bgw);border:1px solid var(--bdl)}
+.gs-card .gs-num{font-family:var(--serif);font-size:48px;font-weight:400;color:rgba(0,0,0,.04);margin-bottom:20px;letter-spacing:-.02em}
+.gs-card h4{font-size:15px;font-weight:600;color:var(--tl1);margin-bottom:10px;letter-spacing:-.01em}
+.gs-card p{font-size:13px;color:var(--tl2);line-height:1.65;font-weight:300}
+
+/* ═══════════════════════ REVIEWS ═══════════════════════ */
+.rev-row{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:72px}
+.rev-card{background:var(--bgc);border:1px solid var(--bd);border-radius:20px;padding:36px}
+.rev-card .stars{color:var(--ac);font-size:13px;letter-spacing:2px;margin-bottom:20px}
+.rev-card blockquote{font-size:14px;color:var(--t2);line-height:1.7;font-weight:300;font-style:normal;margin-bottom:20px}
+.rev-card cite{font-size:12px;color:var(--t3);font-style:normal;font-weight:500}
+
+/* ═══════════════════════ TEAM ═══════════════════════ */
+.team-bg{background:var(--bgl);color:var(--tl1)}
+.team-row{display:flex;justify-content:center;gap:56px;margin-top:56px}
+.team-m{text-align:center;max-width:200px}
+.team-av{width:72px;height:72px;border-radius:50%;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:24px;font-weight:500;letter-spacing:-.02em}
+.team-name{font-size:14px;font-weight:600;color:var(--tl1)}
+.team-role{font-size:12px;font-weight:500;margin-top:3px}
+.team-desc{font-size:12px;color:var(--tl3);margin-top:6px;line-height:1.5;font-weight:300}
+
+/* ═══════════════════════ CTA ═══════════════════════ */
+.cta{text-align:center;position:relative;padding:160px 40px}
+.cta-glow{position:absolute;width:600px;height:600px;border-radius:50%;filter:blur(160px);top:50%;left:50%;transform:translate(-50%,-50%);background:var(--ac);opacity:.04;pointer-events:none}
+
+/* ═══════════════════════ FOOTER ═══════════════════════ */
+.foot{border-top:1px solid var(--bd);padding:72px 40px 48px}
+.foot-in{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px}
+.foot-sub{font-size:13px;color:var(--t3);line-height:1.6;max-width:260px;font-weight:300}
+.foot-col h4{font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--t3);margin-bottom:20px}
+.foot-col a{display:block;color:var(--t2);text-decoration:none;font-size:13px;font-weight:300;padding:3px 0;transition:color .2s}
+.foot-col a:hover{color:var(--ac2)}
+.foot-bot{max-width:1100px;margin:48px auto 0;padding-top:24px;border-top:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center}
+.foot-bot p{font-size:12px;color:var(--t3);font-weight:300}
+
+/* ═══════════════════════ ANIMATIONS ═══════════════════════ */
+@keyframes fu{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pul{0%,100%{opacity:1}50%{opacity:.3}}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.4,0,.2,1),transform .8s cubic-bezier(.4,0,.2,1)}
+.rv.vis{opacity:1;transform:translateY(0)}
+
+/* ═══════════════════════ RESPONSIVE ═══════════════════════ */
+@media(max-width:960px){
+  .how-g{grid-template-columns:repeat(2,1fr)}
+  .sf-phone-wrap{display:none}
+  .sf-text{max-width:100%}
+  .sf-panel{min-height:auto;padding:80px 0}
+  .div-bar{grid-template-columns:repeat(2,1fr)}
+  .sc-grid{grid-template-columns:1fr}.sc-card.tall{grid-row:span 1;min-height:auto}
+  .feat-g{grid-template-columns:1fr 1fr}
+  .gs-row{grid-template-columns:1fr}
+  .rev-row{grid-template-columns:1fr}
+  .foot-in{grid-template-columns:1fr 1fr}
+  .hero-stats{gap:40px}
+  .sec{padding:100px 32px}
+}
+@media(max-width:640px){
+  .nav-l{display:none}.mob-btn{display:block}
+  .how-g,.feat-g,.div-bar{grid-template-columns:1fr}
+  .hero-stats{flex-direction:column;gap:28px}
+  .sec{padding:80px 20px}
+  .foot-in{grid-template-columns:1fr;gap:32px}
+  .foot-bot{flex-direction:column;gap:12px;text-align:center}
+  .team-row{flex-direction:column;align-items:center;gap:40px}
+  .hero{padding:120px 24px 80px}
+  .hero h1{font-size:42px}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav class="nav" id="nav"><div class="nav-in">
+  <a href="/" style="text-decoration:none"><img src="phoebe-logo.png" alt="Phoebe" style="height:24px;display:block"></a>
+  <ul class="nav-l">
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="/phoebe/termsandpolicy">Legal</a></li>
+    <li><a href="https://testflight.apple.com/join/Hvqvx572" class="nav-cta">Download Beta</a></li>
+  </ul>
+  <button class="mob-btn" id="mobBtn"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="5" x2="17" y2="5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="15" x2="17" y2="15"/></svg></button>
+</div></nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-grad"></div>
+  <div class="hero-c">
+    <div class="hero-tag"><span class="dot"></span> Now in Beta &mdash; iOS</div>
+    <h1>Predict migraines<br><em>before they hit</em></h1>
+    <p class="hero-sub">Phoebe combines your Apple Watch biometrics with real-time atmospheric intelligence to forecast migraine risk &mdash; so you can act before the pain arrives.</p>
+    <div class="hero-act">
+      <a href="https://testflight.apple.com/join/Hvqvx572" class="btn-p"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>Download for iOS</a>
+      <a href="#how" class="btn-s">Learn More</a>
+    </div>
+    <div class="hero-stats">
+      <div class="h-stat"><div class="val" style="color:var(--ac2)">92%</div><div class="lbl">Accuracy</div></div>
+      <div class="h-stat"><div class="val" style="color:var(--gn)">27</div><div class="lbl">Features</div></div>
+      <div class="h-stat"><div class="val" style="color:var(--gd)">7-Day</div><div class="lbl">Forecast</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DIVIDER ═══ -->
+<div class="div-bar">
+  <div class="div-item rv"><h3>Smarter Prevention</h3><p>Read the signals your body is already sending before you feel them.</p></div>
+  <div class="div-item rv"><h3>Read the Atmosphere</h3><p>Hour-by-hour barometric pressure, humidity, and temperature at your exact location.</p></div>
+  <div class="div-item rv"><h3>Understand Your Sleep</h3><p>See what your nights are really doing to your days.</p></div>
+  <div class="div-item rv"><h3>Zero-Effort Logging</h3><p>90% passive. When you do log, just speak.</p></div>
+</div>
+
+<!-- ═══ HOW IT WORKS ═══ -->
+<section class="sec" id="how" style="background:var(--bg)">
+  <div class="si">
+    <div class="sec-lab">How It Works</div>
+    <div class="sec-t">Passive intelligence.<br>Zero effort.</div>
+    <div class="sec-s">Your Watch collects. The weather shifts. Phoebe connects the dots and warns you before conditions align for an attack.</div>
+    <div class="how-g">
+      <div class="how-item rv"><div class="step">Step 01</div><h3>Biometric Ingest</h3><p>Sleep, HRV, heart rate from Apple HealthKit. Runs silently &mdash; no manual logging.</p></div>
+      <div class="how-item rv"><div class="step">Step 02</div><h3>Atmospheric Scan</h3><p>Barometric pressure, humidity, temperature via WeatherKit. Your microclimate, not a city average.</p></div>
+      <div class="how-item rv"><div class="step">Step 03</div><h3>ML Prediction</h3><p>XGBoost blends 27 features into a personalized Blended Risk Score. Accuracy improves over time.</p></div>
+      <div class="how-item rv"><div class="step">Step 04</div><h3>Proactive Alert</h3><p>Pressure dropping and sleep was short? A contextual nudge hours before the pain window.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STICKY PHONE SCROLL ═══ -->
+<section class="sf-wrap" id="features">
+  <div class="sf-cont">
+    <div class="sf-text">
+      <div class="sf-panel" data-screen="0"><div>
+        <div class="p-lab">7-Day Forecast</div>
+        <div class="p-ttl">See the week ahead.<br>Prepare, don't react.</div>
+        <p class="p-desc">Each morning, Phoebe shows your risk for the days ahead. A pressure front arriving Thursday? You'll know by Tuesday &mdash; with time to adjust sleep, schedule, and medication.</p>
+      </div></div>
+      <div class="sf-panel" data-screen="1"><div>
+        <div class="p-lab">Bioweather Intelligence</div>
+        <div class="p-ttl">Your weather isn't<br>everyone's weather.</div>
+        <p class="p-desc">Most people check the weather for rain. You check it for pain. Phoebe tracks barometric drops, humidity spikes, and temperature swings &mdash; pinpointed to your coordinates, updated hourly.</p>
+      </div></div>
+      <div class="sf-panel" data-screen="2"><div>
+        <div class="p-lab">Voice Check-In</div>
+        <div class="p-ttl">When it hurts too much<br>to look at a screen.</div>
+        <p class="p-desc">Hold the button and speak. &ldquo;Severe right side, started an hour ago, took sumatriptan.&rdquo; Phoebe logs severity, location, triggers, medication &mdash; without a single tap.</p>
+      </div></div>
+      <div class="sf-panel" data-screen="3"><div>
+        <div class="p-lab">AI Health Assistant</div>
+        <div class="p-ttl">Ask questions.<br>Get answers from<br>your data.</div>
+        <p class="p-desc">&ldquo;What are my top triggers?&rdquo; Phoebe answers from your diary only &mdash; no internet knowledge, no guessing. Your patterns, your data, your truth.</p>
+      </div></div>
+    </div>
+    <!-- PHONE: JS-controlled fixed positioning -->
+    <div class="sf-phone-wrap" id="phoneWrap">
+      <div class="sf-phone-inner is-static" id="phoneInner">
+        <div class="phone">
+          <div class="phone-notch"></div>
+          <div class="phone-scr" id="phoneScr">
+            <img class="scr on" data-idx="0" src="screen-forecast.png" alt="7-Day Risk Forecast">
+            <img class="scr" data-idx="1" src="screen-bioweather.png" alt="Bioweather Intelligence">
+            <img class="scr" data-idx="2" src="screen-voice.png" alt="Voice Check-In">
+            <img class="scr" data-idx="3" src="screen-dashboard.png" alt="Dashboard">
+          </div>
+        </div>
+        <div class="phone-dots" id="phoneDots"><div class="d on"></div><div class="d"></div><div class="d"></div><div class="d"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SCENARIOS ═══ -->
+<section class="sec" style="background:var(--bg)">
+  <div class="si" style="text-align:center;margin-bottom:72px">
+    <div class="sec-lab">Intelligence In Action</div>
+    <div class="sec-t">Phoebe reaches out first.</div>
+    <div class="sec-s" style="margin:0 auto">Real scenarios. Real alerts. This is what a migraine early warning system feels like.</div>
+  </div>
+  <div class="sc-grid">
+    <div class="sc-card sc-v tall rv"><div class="sc-tag">Pressure Front</div><h3>Tomorrow looks risky.<br>Tonight matters.</h3><p>8pm Wednesday. Pressure dropping 7 hPa by morning. Your HRV declining since lunch. Phoebe connects both signals.</p><div class="ai-bub"><div class="ai-tag">Phoebe Alert</div><strong>Tomorrow: 68% Risk.</strong> Barometric pressure dropping 7 hPa overnight while your HRV is below your 7-day average. Consider your preventive and prioritize sleep.</div></div>
+    <div class="sc-card sc-g rv"><div class="sc-tag">Morning Insight</div><h3>Your sleep tells a story.</h3><p>4.5 hours of sleep. Resting heart rate spiked to 72. Phoebe adjusts your risk before you feel a thing.</p><div class="ai-bub"><div class="ai-tag">Morning Brief</div>Sleep was <strong>significantly below baseline</strong>. Combined with yesterday's weather shift, today carries elevated risk.</div></div>
+    <div class="sc-card sc-y rv"><div class="sc-tag">Voice Capture</div><h3>Logging without looking.</h3><p>Mid-attack. Lights off. You hold the button and whisper. Phoebe captures severity, triggers, medication &mdash; no screen, no forms.</p></div>
+    <div class="sc-card sc-r rv"><div class="sc-tag">Pattern Discovery</div><h3>The trigger you didn't know.</h3><p>After 30 days of passive data, Phoebe surfaces a compound trigger.</p><div class="ai-bub"><div class="ai-tag">Phoebe AI</div>Your top compound trigger is <strong>poor sleep + pressure drop</strong>. This preceded 85% of your attacks this month.</div></div>
+  </div>
+</section>
+
+<!-- ═══ FEATURES ═══ -->
+<section class="sec" style="background:var(--bg2)">
+  <div class="si">
+    <div class="sec-lab">Features</div>
+    <div class="sec-t">Built different.<br>Built with care.</div>
+    <div class="feat-g">
+      <div class="feat-item rv"><div class="fi-line" style="background:var(--ac)"></div><h4>XGBoost ML Engine</h4><p>27 biometric and environmental features. Personalizes to your trigger profile over time.</p></div>
+      <div class="feat-item rv"><div class="fi-line" style="background:var(--gn)"></div><h4>Apple Watch Native</h4><p>Deep HealthKit integration. Sleep, HRV, heart rate, steps. Your existing Watch does everything.</p></div>
+      <div class="feat-item rv"><div class="fi-line" style="background:var(--gd)"></div><h4>WeatherKit Precision</h4><p>Hyperlocal atmospheric data at your GPS coordinates. Pressure, humidity, temperature &mdash; hourly.</p></div>
+      <div class="feat-item rv"><div class="fi-line" style="background:var(--rd)"></div><h4>PDF Medical Reports</h4><p>Clinical-grade summaries you hand directly to your neurologist. One tap.</p></div>
+      <div class="feat-item rv"><div class="fi-line" style="background:var(--ac)"></div><h4>Privacy by Design</h4><p>No ads. No data selling. No third-party trackers. Deleted completely when you ask.</p></div>
+      <div class="feat-item rv"><div class="fi-line" style="background:var(--gn)"></div><h4>Clinical Luxury Design</h4><p>Dark mode for photosensitivity. Beautiful when you're well. Usable when you're not.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ GETTING STARTED ═══ -->
+<section class="sec" style="background:var(--bgl)">
+  <div class="si" style="text-align:center">
+    <div class="sec-lab" style="color:var(--ac)">Getting Started</div>
+    <div class="sec-t" style="color:var(--tl1)">Three minutes to<br>your first forecast.</div>
+    <div class="gs-row">
+      <div class="gs-card rv"><div class="gs-num">01</div><h4>Download &amp; Connect</h4><p>Install from TestFlight. Create your account. Grant HealthKit access. Phoebe syncs your Watch history immediately.</p></div>
+      <div class="gs-card rv"><div class="gs-num">02</div><h4>Set Your Profile</h4><p>Tell Phoebe your headache history, known triggers, and conditions. This calibrates the model from day one.</p></div>
+      <div class="gs-card rv"><div class="gs-num">03</div><h4>Get Your Forecast</h4><p>Open the app and see your 7-day risk. The more you use Phoebe, the more it learns. Accuracy improves every week.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ REVIEWS ═══ -->
+<section class="sec" style="background:var(--bg)">
+  <div class="si" style="text-align:center;margin-bottom:72px">
+    <div class="sec-lab">Early Feedback</div>
+    <div class="sec-t">Tested by real sufferers.</div>
+  </div>
+  <div class="si">
+    <div class="rev-row">
+      <div class="rev-card rv"><div class="stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div><blockquote>&ldquo;The barometric pressure tracking alone makes this worth downloading. I've suspected weather triggers for years but never had the data to prove it.&rdquo;</blockquote><cite>Beta Tester &middot; Chronic Migraine</cite></div>
+      <div class="rev-card rv"><div class="stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div><blockquote>&ldquo;Voice check-in is a game changer. During an attack I can barely see my phone. Being able to just talk and have it logged is exactly what I needed.&rdquo;</blockquote><cite>Beta Tester &middot; Episodic Migraine</cite></div>
+      <div class="rev-card rv"><div class="stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div><blockquote>&ldquo;Showed my neurologist the PDF report and she was genuinely impressed. She wished more patients had data like this.&rdquo;</blockquote><cite>Beta Tester &middot; Migraine with Aura</cite></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TEAM ═══ -->
+<section class="sec team-bg" id="about">
+  <div class="si" style="text-align:center">
+    <div class="sec-lab" style="color:var(--ac)">Our Story</div>
+    <div class="sec-t" style="color:var(--tl1)">Built because someone<br>we love was suffering.</div>
+    <p style="font-size:16px;font-weight:300;color:var(--tl2);max-width:540px;margin:0 auto 20px;line-height:1.7">Phoebe was born from watching someone endure 15 years of chronic migraines &mdash; and realizing every app only records pain after the fact.</p>
+    <p style="font-size:16px;font-weight:300;color:var(--tl2);max-width:540px;margin:0 auto 56px;line-height:1.7">Named after the Greek Titaness of the Moon &mdash; because migraines, like tides, follow invisible rhythms.</p>
+    <div class="team-row">
+      <div class="team-m"><div class="team-av" style="background:rgba(155,143,224,.08);color:var(--ac)">NS</div><div class="team-name">Nemanja Stamenovic</div><div class="team-role" style="color:var(--ac)">Founder &amp; CEO</div><div class="team-desc">Full-stack engineer. Built the entire platform solo from Belgrade.</div></div>
+      <div class="team-m"><div class="team-av" style="background:rgba(109,191,160,.08);color:var(--gn)">MV</div><div class="team-name">Milos Vidojkovic</div><div class="team-role" style="color:var(--gn)">Co-Founder &amp; CTO</div><div class="team-desc">Backend infrastructure, data pipelines, scalable systems.</div></div>
+      <div class="team-m"><div class="team-av" style="background:rgba(212,185,106,.08);color:var(--gd)">JS</div><div class="team-name">Dr. Jelena Stamenovic</div><div class="team-role" style="color:var(--gd)">Chief Medical Advisor</div><div class="team-desc">Professor of Neurology, University of Nis. 15+ years clinical experience.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="cta" style="background:var(--bg)">
+  <div class="cta-glow"></div>
+  <div class="si" style="position:relative;z-index:2">
+    <div class="sec-t" style="text-align:center">Ready to predict<br>instead of react?</div>
+    <p style="font-size:16px;font-weight:300;color:var(--t2);max-width:480px;margin:0 auto 44px;text-align:center;line-height:1.7">Start with one day. One forecast. One moment where you knew it was coming and had time to do something about it.</p>
+    <div style="text-align:center">
+      <a href="https://testflight.apple.com/join/Hvqvx572" class="btn-p" style="font-size:15px;padding:16px 40px"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>Download Beta for iOS</a>
+      <p style="margin-top:16px;font-size:12px;color:var(--t3);font-weight:300">Free &middot; No ads &middot; Apple Watch recommended</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="foot"><div class="foot-in">
+  <div>
+    <!-- FOOTER LOGO -->
+    <img src="phoebe-logo.png" alt="Phoebe" style="height:18px;opacity:.5;margin-bottom:16px;display:block">
+    <p class="foot-sub">Preventive intelligence for migraines and chronic neurological conditions. Belgrade, Serbia.</p>
+  </div>
+  <div class="foot-col"><h4>Product</h4><a href="https://testflight.apple.com/join/Hvqvx572">Download Beta</a><a href="#how">How It Works</a><a href="#features">Features</a></div>
+  <div class="foot-col"><h4>Company</h4><a href="#about">About</a><a href="/cdn-cgi/l/email-protection#bbd2d5ddd4fbded6cbdedfd4d895d8d4d6">Contact</a><a href="/cdn-cgi/l/email-protection#81efe4ece0efebe0c1e4ecf1e4e5eee2afe2eeec">Report a Bug</a></div>
+  <div class="foot-col"><h4>Resources</h4><a href="/phoebe/support">Support &amp; FAQ</a><a href="/cdn-cgi/l/email-protection#f282809b8493918bb2979f8297969d91dc919d9f">Data Requests</a></div>
+  <div class="foot-col"><h4>Legal</h4><a href="/phoebe/termsandpolicy#privacy-policy">Privacy Policy</a><a href="/phoebe/termsandpolicy#terms-of-use">Terms of Use</a></div>
+</div><div class="foot-bot"><p>&copy; 2026 EMPEDOC AI LLC</p><p>Belgrade, Serbia</p></div></footer>
+
+<!-- ═══ JS ═══ -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+(function(){
+  var nav=document.getElementById('nav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('sc',window.scrollY>40)});
+  document.getElementById('mobBtn').addEventListener('click',function(){
+    var n=document.querySelector('.nav-l'),o=n.style.display==='flex';
+    if(o){n.style.display='none'}
+    else{n.style.cssText='display:flex;flex-direction:column;position:absolute;top:72px;left:0;right:0;background:rgba(8,7,12,.96);padding:24px 40px;gap:20px;border-bottom:1px solid rgba(255,255,255,.06);backdrop-filter:blur(32px);z-index:999'}
+  });
+  var ro=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('vis')})},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.rv').forEach(function(el){ro.observe(el)});
+
+  /* ═══ STICKY PHONE (JS position:fixed) ═══ */
+  var wrap=document.getElementById('phoneWrap');
+  var inner=document.getElementById('phoneInner');
+  var panels=document.querySelectorAll('.sf-panel');
+  var screens=document.querySelectorAll('#phoneScr>.scr');
+  var dots=document.querySelectorAll('#phoneDots>.d');
+  if(!wrap||!inner) return;
+  var curIdx=0;
+  function setScreen(i){
+    if(i===curIdx||i<0||i>=screens.length)return;
+    screens[curIdx].classList.remove('on');dots[curIdx].classList.remove('on');
+    screens[i].classList.add('on');dots[i].classList.add('on');
+    curIdx=i;
+  }
+  var ticking=false;
+  window.addEventListener('scroll',function(){
+    if(!ticking){window.requestAnimationFrame(function(){
+      var wr=wrap.getBoundingClientRect();
+      var ph=inner.offsetHeight;
+      var co=Math.max(24,(window.innerHeight-ph)/2);
+      if(wr.top>co){inner.className='sf-phone-inner is-static';inner.style.cssText='top:'+co+'px'}
+      else if(wr.bottom<ph+co){inner.className='sf-phone-inner is-bottom';inner.style.cssText=''}
+      else{inner.className='sf-phone-inner is-fixed';inner.style.cssText='top:'+co+'px;left:'+wr.left+'px;width:'+wr.offsetWidth+'px'}
+      var vm=window.innerHeight/2,cl=0,cd=Infinity;
+      
