@@ -9,19 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#08070C;
-  --ac:#9B8FE0;
-  --ac2:#B5ABEB;
-  --gn:#6DBFA0;
-  --gd:#D4B96A;
-  --t1:#EEEDF2;
-  --t2:#7A7688;
-  --t3:#4E4B5C;
-  --bd:rgba(255,255,255,.06);
-  --serif:'Cormorant Garamond',Georgia,serif;
-  --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
-}
+:root{--bg:#08070C;--ac:#9B8FE0;--ac2:#B5ABEB;--gn:#6DBFA0;--gd:#D4B96A;--t1:#EEEDF2;--t2:#7A7688;--t3:#4E4B5C;--bd:rgba(255,255,255,.06);--serif:'Cormorant Garamond',Georgia,serif;--sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:var(--sans);background:var(--bg);color:var(--t1);-webkit-font-smoothing:antialiased;overflow-x:hidden}
@@ -49,15 +37,7 @@ body::after{content:'';position:fixed;inset:0;background:url("data:image/svg+xml
 .foot{padding:40px;text-align:center}
 .foot p{font-size:11px;color:var(--t3);font-weight:300;letter-spacing:.3px}
 @keyframes fi{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:640px){
-  .hero{padding:60px 24px}
-  .hero h1{font-size:40px}
-  .products{padding:0 24px 100px}
-  .products-inner{grid-template-columns:1fr}
-  .prod-card{padding:40px 32px}
-  .links-bar a{display:block;margin:12px 0}
-  .links-bar .sep{display:none}
-}
+@media(max-width:640px){.hero{padding:60px 24px}.hero h1{font-size:40px}.products{padding:0 24px 100px}.products-inner{grid-template-columns:1fr}.prod-card{padding:40px 32px}.links-bar a{display:block;margin:12px 0}.links-bar .sep{display:none}}
 </style>
 </head>
 <body>
@@ -65,7 +45,7 @@ body::after{content:'';position:fixed;inset:0;background:url("data:image/svg+xml
   <div class="hero-glow"></div>
   <div class="hero-inner">
     <div class="logo-wrap">
-      <img src="empedoc-logo.png" alt="EmpedocLabs" style="height:36px;filter:invert(1);opacity:.85">
+      <img src="empedoc-logo.png" alt="EmpedocLabs" style="height:36px;filter:brightness(0) invert(1);opacity:.85">
     </div>
     <h1>Preventive intelligence<br>for the <em>nervous system</em></h1>
     <p class="hero-desc">EmpedocLabs builds AI that predicts neurological events before they happen &mdash; combining wearable biometrics, atmospheric data, and machine learning to shift healthcare from reactive to preventive.</p>
@@ -97,7 +77,7 @@ body::after{content:'';position:fixed;inset:0;background:url("data:image/svg+xml
   <a href="mailto:info@empedoc.com">info@empedoc.com</a>
 </div>
 <div class="foot">
-  <p>&copy; 2026 EMPEDOC AI LLC &middot; Belgrade, Serbia</p>
+  <p>&copy; 2026 EMPEDOC AI LLC &middot; Ni&#353;, Serbia</p>
 </div>
 </body>
 </html>
